@@ -1533,7 +1533,7 @@
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				WARNING_CFLAGS = "";
+				WARNING_CFLAGS = "-Wno-unused-function";
 			};
 			name = Debug;
 		};
@@ -1592,7 +1592,7 @@
 				USER_HEADER_SEARCH_PATHS = "";
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-				WARNING_CFLAGS = "";
+				WARNING_CFLAGS = "-Wno-unused-function";
 			};
 			name = Release;
 		};
