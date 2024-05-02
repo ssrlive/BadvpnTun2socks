@@ -70,8 +70,8 @@
 		B60905A52BE28DC0006981A3 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B60905A22BE28D96006981A3 /* libresolv.tbd */; };
 		B60905BA2BE296EA006981A3 /* GCDAsyncUdpSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B60905B62BE296EA006981A3 /* GCDAsyncUdpSocket.m */; };
 		B60905BB2BE296EA006981A3 /* GCDAsyncSocket.m in Sources */ = {isa = PBXBuildFile; fileRef = B60905B72BE296EA006981A3 /* GCDAsyncSocket.m */; };
-		B60905BC2BE296EA006981A3 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = B60905B82BE296EA006981A3 /* GCDAsyncUdpSocket.h */; };
-		B60905BD2BE296EA006981A3 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = B60905B92BE296EA006981A3 /* GCDAsyncSocket.h */; };
+		B60905BC2BE296EA006981A3 /* GCDAsyncUdpSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = B60905B82BE296EA006981A3 /* GCDAsyncUdpSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B60905BD2BE296EA006981A3 /* GCDAsyncSocket.h in Headers */ = {isa = PBXBuildFile; fileRef = B60905B92BE296EA006981A3 /* GCDAsyncSocket.h */; settings = {ATTRIBUTES = (Public, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -497,6 +497,7 @@
 		B60905B72BE296EA006981A3 /* GCDAsyncSocket.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GCDAsyncSocket.m; sourceTree = "<group>"; };
 		B60905B82BE296EA006981A3 /* GCDAsyncUdpSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncUdpSocket.h; sourceTree = "<group>"; };
 		B60905B92BE296EA006981A3 /* GCDAsyncSocket.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GCDAsyncSocket.h; sourceTree = "<group>"; };
+		B6B7341F2BE791AC0035C07B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -514,6 +515,7 @@
 		9B0CFA021C1C0B1A007BD7C6 = {
 			isa = PBXGroup;
 			children = (
+				B6B7341F2BE791AC0035C07B /* Info.plist */,
 				B60905B52BE296EA006981A3 /* CocoaAsyncSocket */,
 				9BDA625C1CAE2576007F2581 /* BadvpnTun2socks */,
 				9B0CFA0C1C1C0B1B007BD7C6 /* Products */,
@@ -1506,7 +1508,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/tun2socks-iOS\"",
@@ -1515,7 +1517,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)/tun2socks-iOS/lwip/src/include/ipv4\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)/tun2socks-iOS/lwip/src/include/ipv6\"",
 				);
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -1565,7 +1567,7 @@
 					"$(inherited)",
 				);
 				GCC_WARN_INHIBIT_ALL_WARNINGS = NO;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/$(TARGET_NAME)/tun2socks-iOS\"",
@@ -1574,7 +1576,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)/tun2socks-iOS/lwip/src/include/ipv4\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)/tun2socks-iOS/lwip/src/include/ipv6\"",
 				);
-				INFOPLIST_FILE = "";
+				INFOPLIST_FILE = Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
