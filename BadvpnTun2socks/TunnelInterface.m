@@ -81,23 +81,19 @@
   NSError *error;
   [_udpSocket bindToPort:0 error:&error];
   if (error) {
+    NSString *desc = [NSString
+        stringWithFormat:@"UDP bind fail(%@).", [error localizedDescription]];
     return [NSError errorWithDomain:kTunnelInterfaceErrorDomain
                                code:1
-                           userInfo:@{
-                             NSLocalizedDescriptionKey : [NSString
-                                 stringWithFormat:@"UDP bind fail(%@).",
-                                                  [error localizedDescription]]
-                           }];
+                           userInfo:@{NSLocalizedDescriptionKey : desc}];
   }
   [_udpSocket beginReceiving:&error];
   if (error) {
+    NSString *desc = [NSString
+        stringWithFormat:@"UDP bind fail(%@).", [error localizedDescription]];
     return [NSError errorWithDomain:kTunnelInterfaceErrorDomain
                                code:1
-                           userInfo:@{
-                             NSLocalizedDescriptionKey : [NSString
-                                 stringWithFormat:@"UDP bind fail(%@).",
-                                                  [error localizedDescription]]
-                           }];
+                           userInfo:@{NSLocalizedDescriptionKey : desc}];
   }
   return nil;
 }

@@ -131,7 +131,7 @@ static int write_tun_header (int fd, void *buf, size_t len)
     iv[1].iov_base = buf;
     iv[1].iov_len = len;
     
-    return header_modify_read_write_return(writev(fd, iv, 2));
+    return header_modify_read_write_return((int)writev(fd, iv, 2));
 }
 
 static int read_tun_header (int fd, void *buf, size_t len)
@@ -144,7 +144,7 @@ static int read_tun_header (int fd, void *buf, size_t len)
     iv[1].iov_base = buf;
     iv[1].iov_len = len;
     
-    return header_modify_read_write_return(readv(fd, iv, 2));
+    return header_modify_read_write_return((int)readv(fd, iv, 2));
 }
 
 #endif
@@ -165,7 +165,7 @@ static void fd_handler (BTap *o, int events)
 #ifdef __APPLE__
         //        int bytes = read_tun_header(o->fd, o->output_packet, o->frame_mtu);
         uint8_t data[2];
-        int bytes = read(o->fd, data, 2);
+        int bytes = (int)read(o->fd, data, 2);
         if (bytes != 2) {
             // Treat zero return value the same as EAGAIN.
             // See: https://bugzilla.kernel.org/show_bug.cgi?id=96381
@@ -180,7 +180,7 @@ static void fd_handler (BTap *o, int events)
         }
         int data_len = data[0] * 256 + data[1];
         
-        bytes = read(o->fd, o->output_packet, data_len);
+        bytes = (int)read(o->fd, o->output_packet, data_len);
 #else
         int bytes = read(o->fd, o->output_packet, o->frame_mtu);
 #endif
@@ -474,6 +474,10 @@ void BTap_Send (BTap *o, uint8_t *data, int data_len)
     
 #else
     
+#if 1
+    NSData *outdata = [[NSData alloc] initWithBytes:data length:data_len];
+    [[TunnelInterface sharedInterface] writePacket:outdata];
+#else
 #ifdef __APPLE__
     //    int bytes = write_tun_header(o->fd, data, data_len);
     NSData *outdata = [[NSData alloc] initWithBytes:data length:data_len];
@@ -499,6 +503,7 @@ void BTap_Send (BTap *o, uint8_t *data, int data_len)
             BLog(BLOG_WARNING, "written %d expected %d", bytes, data_len + 2);
         }
     }
+#endif // #if 1
     
 #endif
 }

@@ -42,6 +42,7 @@
 #include "BConnection.h"
 
 #include "generated/blog_channel_BConnection.h"
+#include "BReactor_badvpn.h"
 
 #define MAX_UNIX_SOCKET_PATH 200
 
@@ -96,7 +97,7 @@ static int build_unix_address (struct unix_addr *out, const char *socket_path)
         return 0;
     }
     
-    out->len = offsetof(struct sockaddr_un, sun_path) + strlen(socket_path) + 1;
+    out->len = (socklen_t) (offsetof(struct sockaddr_un, sun_path) + strlen(socket_path) + 1);
     out->u.addr.sun_family = AF_UNIX;
     strcpy(out->u.addr.sun_path, socket_path);
     
@@ -252,7 +253,7 @@ static void connection_send (BConnection *o)
     }
     
     // send
-    int bytes = write(o->fd, o->send.busy_data, o->send.busy_data_len);
+    int bytes = (int) write(o->fd, o->send.busy_data, o->send.busy_data_len);
     if (bytes < 0) {
         if (!o->is_hupd && (errno == EAGAIN || errno == EWOULDBLOCK)) {
             // wait for fd
@@ -294,7 +295,7 @@ static void connection_recv (BConnection *o)
     BLog(BLOG_INFO, "clien try read: %d", o->recv.busy_data_avail);
 
     // recv
-    int bytes = recv(o->fd, o->recv.busy_data, o->recv.busy_data_avail, 0);
+    int bytes = (int) recv(o->fd, o->recv.busy_data, o->recv.busy_data_avail, 0);
     if (bytes < 0) {
         if (!o->is_hupd && (errno == EAGAIN || errno == EWOULDBLOCK)) {
             // wait for fd

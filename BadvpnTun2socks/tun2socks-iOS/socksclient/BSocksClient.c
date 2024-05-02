@@ -202,7 +202,7 @@ void connector_handler (BSocksClient* o, int is_error)
     BLog(BLOG_DEBUG, "tun2socks socks send hello data<len: %d>", size.value);
 #endif
     // send
-    PacketPassInterface_Sender_Send(o->control.send_if, (uint8_t *)o->buffer, size.value);
+    PacketPassInterface_Sender_Send(o->control.send_if, (uint8_t *)o->buffer, (int)size.value);
     
     // set state
     o->state = STATE_SENDING_HELLO;
@@ -311,7 +311,7 @@ void recv_handler_done (BSocksClient *o, int data_len)
                     ptr += ai->password.password_len;
                     
                     // start sending
-                    PacketPassInterface_Sender_Send(o->control.send_if, (uint8_t *)o->buffer, size.value);
+                    PacketPassInterface_Sender_Send(o->control.send_if, (uint8_t *)o->buffer, (int)size.value);
                     
                     // set state
                     o->state = STATE_SENDING_PASSWORD;
@@ -425,7 +425,7 @@ void send_handler_done (BSocksClient *o)
             }
             
             // receive hello
-            start_receive(o, (uint8_t *)o->buffer, size.value);
+            start_receive(o, (uint8_t *)o->buffer, (int)size.value);
             
             // set state
             o->state = STATE_SENT_HELLO;
@@ -460,7 +460,7 @@ void send_handler_done (BSocksClient *o)
             }
             
             // receive reply header
-            start_receive(o, (uint8_t *)o->buffer, size.value);
+            start_receive(o, (uint8_t *)o->buffer, (int)size.value);
             
             // set state
             o->state = STATE_SENT_PASSWORD;
@@ -517,7 +517,7 @@ void auth_finished (BSocksClient *o)
     BLog(BLOG_DEBUG, "tun2socks socks send request data<len: %d>", size.value);
 #endif
     // send request
-    PacketPassInterface_Sender_Send(o->control.send_if, (uint8_t *)o->buffer, size.value);
+    PacketPassInterface_Sender_Send(o->control.send_if, (uint8_t *)o->buffer, (int)size.value);
     
     // set state
     o->state = STATE_SENDING_REQUEST;

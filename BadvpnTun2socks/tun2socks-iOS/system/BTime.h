@@ -70,6 +70,7 @@ struct _BTime_global {
 };
 
 #ifdef __MACH__
+#undef CLOCK_MONOTONIC
 #define CLOCK_MONOTONIC 1
 int clock_gettime_ex(int clk_id, struct timespec* t);
 #endif

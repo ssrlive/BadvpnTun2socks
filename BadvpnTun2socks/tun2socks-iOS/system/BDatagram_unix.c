@@ -51,6 +51,7 @@
 #include "BDatagram.h"
 
 #include "generated/blog_channel_BDatagram.h"
+#include "BReactor_badvpn.h"
 
 struct sys_addr {
     socklen_t len;
@@ -291,7 +292,7 @@ static void do_send (BDatagram *o)
     int bytes = -1;
     switch (o->send.local_addr.type) {
         case BADDR_TYPE_IPV4: {
-            bytes = sendto(o->fd, iov.iov_base, iov.iov_len, 0, msg.msg_name, msg.msg_namelen);
+            bytes = (int) sendto(o->fd, iov.iov_base, iov.iov_len, 0, msg.msg_name, msg.msg_namelen);
         } break;
 
         case BADDR_TYPE_IPV6: {
@@ -302,11 +303,11 @@ static void do_send (BDatagram *o)
             struct in6_pktinfo *pktinfo = (struct in6_pktinfo *)CMSG_DATA(cmsg);
             memcpy(pktinfo->ipi6_addr.s6_addr, o->send.local_addr.ipv6, 16);
             controllen += CMSG_SPACE(sizeof(struct in6_pktinfo));
-            msg.msg_controllen = controllen;
+            msg.msg_controllen = (socklen_t) controllen;
             if (msg.msg_controllen == 0) {
                 msg.msg_control = NULL;
             }
-            bytes = sendmsg(o->fd, &msg, 0);
+            bytes = (int) sendmsg(o->fd, &msg, 0);
         } break;
     }
 #else
@@ -429,7 +430,7 @@ static void do_recv (BDatagram *o)
     msg.msg_controllen = sizeof(cdata);
     
     // recv
-    int bytes = recvmsg(o->fd, &msg, 0);
+    int bytes = (int) recvmsg(o->fd, &msg, 0);
     if (bytes < 0) {
         if (errno == EAGAIN || errno == EWOULDBLOCK) {
             // wait for fd

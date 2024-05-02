@@ -71,7 +71,7 @@ int parse_loglevel (char *str)
     char *endptr;
     long int res = strtol(str, &endptr, 10);
     if (*str && !*endptr && res >= 0 && res <= BLOG_DEBUG) {
-        return res;
+        return (int) res;
     }
     
     return -1;

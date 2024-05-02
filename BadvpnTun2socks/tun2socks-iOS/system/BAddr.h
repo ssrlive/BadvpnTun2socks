@@ -317,7 +317,7 @@ int BIPAddr_IsInvalid (BIPAddr *addr)
 
 int BIPAddr_Resolve (BIPAddr *addr, char *str, int noresolve)
 {
-    int len = strlen(str);
+    int len = (int) strlen(str);
     
     char *addr_start;
     int addr_len;
@@ -624,7 +624,7 @@ void BAddr_Print (BAddr *addr, char *out)
 
 int BAddr_Parse2 (BAddr *addr, char *str, char *name, int name_len, int noresolve)
 {
-    int len = strlen(str);
+    int len = (int) strlen(str);
     if (len < 1 || len > 1000) {
         return 0;
     }
