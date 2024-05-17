@@ -70,7 +70,6 @@
 #include "tuntap/BTap.h"
 
 #include "generated/blog_channel_BTap.h"
-#include "TunnelInterface.h"
 
 static void report_error (BTap *o);
 static void output_handler_recv (BTap *o, uint8_t *data);
@@ -387,6 +386,9 @@ success:
 
 void BTap_Free (BTap *o)
 {
+    o->tunnel_writer = NULL;
+    o->tunnel_writer_ctx = NULL;
+
     DebugObject_Free(&o->d_obj);
     DebugError_Free(&o->d_err);
     
@@ -474,24 +476,21 @@ void BTap_Send (BTap *o, uint8_t *data, int data_len)
     
 #else
     
-#if 1
-    NSData *outdata = [[NSData alloc] initWithBytes:data length:data_len];
-    [[TunnelInterface sharedInterface] writePacket:outdata];
-#else
 #ifdef __APPLE__
     //    int bytes = write_tun_header(o->fd, data, data_len);
-    NSData *outdata = [[NSData alloc] initWithBytes:data length:data_len];
 #if TCP_DATA_LOG_ENABLE
     BLog(BLOG_DEBUG, "tun2socks send to tunnel data<len: %d>", data_len);
 #endif
-    [[TunnelInterface sharedInterface] writePacket:outdata];
-    return;
+    if (o->tunnel_writer) {
+        o->tunnel_writer(data, data_len, o->tunnel_writer_ctx);
+        return;
+    }
     uint8_t msg[o->frame_mtu+2];
     msg[0] = data_len / 256;
     msg[1] = data_len % 256;
     memcpy(msg + 2, data, data_len);
 
-    int bytes = write(o->fd, msg, data_len + 2);
+    int bytes = (int)write(o->fd, msg, data_len + 2);
 #else
     int bytes = write(o->fd, data, data_len);
 #endif
@@ -503,8 +502,6 @@ void BTap_Send (BTap *o, uint8_t *data, int data_len)
             BLog(BLOG_WARNING, "written %d expected %d", bytes, data_len + 2);
         }
     }
-#endif // #if 1
-    
 #endif
 }
 

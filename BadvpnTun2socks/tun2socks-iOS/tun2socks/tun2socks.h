@@ -1,6 +1,6 @@
 /*
  * Copyright (C) Ambroz Bizjak <ambrop7@gmail.com>
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  * 1. Redistributions of source code must retain the above copyright
@@ -11,7 +11,7 @@
  * 3. Neither the name of the author nor the
  *    names of its contributors may be used to endorse or promote products
  *    derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -25,7 +25,7 @@
  */
 
 
-// name of the program
+ // name of the program
 #define PROGRAM_NAME "tun2socks"
 
 // size of temporary buffer for passing data from the SOCKS server to TCP for sending
@@ -46,5 +46,7 @@
 // option to override the destination addresses to give the SOCKS server
 //#define OVERRIDE_DEST_ADDR "10.111.0.2:2000"
 
-extern int tun2socks_main (int argc, char **argv, int fd, int mtu);
+typedef void (*tunnel_writer)(uint8_t* data, int data_len, void* ctx);
+
+extern int tun2socks_main(int argc, char** argv, int fd, int mtu, tunnel_writer writer, void* ctx);
 extern void stop_tun2socks(void);

@@ -240,7 +240,7 @@ static int client_socks_recv_send_out (struct tcp_client *client);
 static err_t client_sent_func (void *arg, struct tcp_pcb *tpcb, u16_t len);
 static void udpgw_client_handler_received (void *unused, BAddr local_addr, BAddr remote_addr, const uint8_t *data, int data_len);
 
-int tun2socks_main (int argc, char **argv, int fd, int mtu)
+int tun2socks_main (int argc, char **argv, int fd, int mtu, tunnel_writer writer, void* ctx)
 {
     if (argc <= 0) {
         return 1;
@@ -336,6 +336,9 @@ int tun2socks_main (int argc, char **argv, int fd, int mtu)
     init_data.init_type = BTAP_INIT_FD;
     init_data.init.fd.fd = fd;
     init_data.init.fd.mtu = mtu;
+
+    device.tunnel_writer = (BTap_write_handler)writer;
+    device.tunnel_writer_ctx = ctx;
     
     if (!BTap_Init2(&device, &ss, init_data, device_error_handler, NULL)) {
     // init TUN device

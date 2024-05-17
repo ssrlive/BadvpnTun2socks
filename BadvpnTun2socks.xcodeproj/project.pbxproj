@@ -61,7 +61,7 @@
 		9BDA65B31CAE25E0007F2581 /* BUnixSignal.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA64121CAE25E0007F2581 /* BUnixSignal.c */; };
 		9BDA65B51CAE25E0007F2581 /* SocksUdpGwClient.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA64151CAE25E0007F2581 /* SocksUdpGwClient.c */; };
 		9BDA65B71CAE25E0007F2581 /* tun2socks.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA64171CAE25E0007F2581 /* tun2socks.c */; };
-		9BDA65BA1CAE25E0007F2581 /* BTap.m in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA641B1CAE25E0007F2581 /* BTap.m */; };
+		9BDA65BA1CAE25E0007F2581 /* BTap.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA641B1CAE25E0007F2581 /* BTap.c */; };
 		9BDA65BB1CAE25E0007F2581 /* udpgw.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA641D1CAE25E0007F2581 /* udpgw.c */; };
 		9BDA65BD1CAE25E0007F2581 /* UdpGwClient.c in Sources */ = {isa = PBXBuildFile; fileRef = 9BDA64201CAE25E0007F2581 /* UdpGwClient.c */; };
 		B609059D2BE289E0006981A3 /* BadvpnTun2socks.h in Headers */ = {isa = PBXBuildFile; fileRef = B60905992BE289E0006981A3 /* BadvpnTun2socks.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -484,7 +484,7 @@
 		9BDA64171CAE25E0007F2581 /* tun2socks.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tun2socks.c; sourceTree = "<group>"; };
 		9BDA64181CAE25E0007F2581 /* tun2socks.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = tun2socks.h; sourceTree = "<group>"; };
 		9BDA641A1CAE25E0007F2581 /* BTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTap.h; sourceTree = "<group>"; };
-		9BDA641B1CAE25E0007F2581 /* BTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTap.m; sourceTree = "<group>"; };
+		9BDA641B1CAE25E0007F2581 /* BTap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = BTap.c; sourceTree = "<group>"; };
 		9BDA641D1CAE25E0007F2581 /* udpgw.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = udpgw.c; sourceTree = "<group>"; };
 		9BDA641E1CAE25E0007F2581 /* udpgw.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = udpgw.h; sourceTree = "<group>"; };
 		9BDA64201CAE25E0007F2581 /* UdpGwClient.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = UdpGwClient.c; sourceTree = "<group>"; };
@@ -1171,7 +1171,7 @@
 			isa = PBXGroup;
 			children = (
 				9BDA641A1CAE25E0007F2581 /* BTap.h */,
-				9BDA641B1CAE25E0007F2581 /* BTap.m */,
+				9BDA641B1CAE25E0007F2581 /* BTap.c */,
 			);
 			path = tuntap;
 			sourceTree = "<group>";
@@ -1315,7 +1315,7 @@
 				9BDA65AC1CAE25E0007F2581 /* BReactor_badvpn.c in Sources */,
 				B609059F2BE289E0006981A3 /* TunnelInterface.m in Sources */,
 				9BDA643B1CAE25E0007F2581 /* PacketProtoFlow.c in Sources */,
-				9BDA65BA1CAE25E0007F2581 /* BTap.m in Sources */,
+				9BDA65BA1CAE25E0007F2581 /* BTap.c in Sources */,
 				9BDA65AF1CAE25E0007F2581 /* BSignal.c in Sources */,
 				9BDA64EE1CAE25E0007F2581 /* ip6_addr.c in Sources */,
 				9BDA642A1CAE25E0007F2581 /* DebugObject.c in Sources */,

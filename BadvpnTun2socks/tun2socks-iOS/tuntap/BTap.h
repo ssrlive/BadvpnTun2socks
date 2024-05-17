@@ -62,6 +62,8 @@
  */
 typedef void (*BTap_handler_error) (void *used);
 
+typedef void (*BTap_write_handler) (uint8_t* data, int data_len, void* ctx);
+
 typedef struct {
     BReactor *reactor;
     BTap_handler_error handler_error;
@@ -83,6 +85,9 @@ typedef struct {
     
     DebugError d_err;
     DebugObject d_obj;
+
+    BTap_write_handler tunnel_writer;
+    void* tunnel_writer_ctx;
 } BTap;
 
 /**
