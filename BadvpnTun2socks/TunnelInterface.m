@@ -82,11 +82,9 @@
         NSString* desc = [NSString stringWithFormat:@"UDP bind fail(%@).", [error localizedDescription]];
         return [NSError errorWithDomain:kTunnelInterfaceErrorDomain code:1 userInfo:@{ NSLocalizedDescriptionKey : desc }];
     }
-    dispatch_async(dispatch_queue_create(NULL, DISPATCH_QUEUE_CONCURRENT), ^{
-        [self _startTun2Socks:serverPort];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(),
-            ^{ [self processPackets]; });
-    });
+    dispatch_async(dispatch_queue_create(NULL, DISPATCH_QUEUE_CONCURRENT), ^{ [self _startTun2Socks:serverPort]; });
+    dispatch_time_t when = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC));
+    dispatch_after(when, dispatch_get_main_queue(), ^{ [self processPackets]; });
     return nil;
 }
 
