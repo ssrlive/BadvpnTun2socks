@@ -62,12 +62,8 @@
 
 - (NSError*)startTun2Socks:(int)serverPort withPacketTunnelFlow:(NEPacketTunnelFlow*)packetFlow {
     if (packetFlow == nil || serverPort <= 0) {
-        return
-            [NSError errorWithDomain:kTunnelInterfaceErrorDomain
-                                code:1
-                            userInfo:@{
-                                NSLocalizedDescriptionKey : @"PacketTunnelFlow can't be nil or serverPort must be greater than 0."
-                            }];
+        NSDictionary* info = @{ NSLocalizedDescriptionKey : @"TunnelFlow can't be nil and serverPort must be greater than 0." };
+        return [NSError errorWithDomain:kTunnelInterfaceErrorDomain code:1 userInfo:info];
     }
     _tunnelPacketFlow = packetFlow;
 

@@ -61,7 +61,6 @@
 #include "lwip/netif.h"
 #include "lwip/tcp.h"
 #include "tun2socks/SocksUdpGwClient.h"
-//#include <Foundation/Foundation.h>
 
 #ifndef BADVPN_USE_WINAPI
 #include "base/BLog_syslog.h"
@@ -336,6 +335,8 @@ int tun2socks_main (int argc, char **argv, int fd, int mtu, tunnel_writer writer
     init_data.init_type = BTAP_INIT_FD;
     init_data.init.fd.fd = fd;
     init_data.init.fd.mtu = mtu;
+
+    memset(&device, 0, sizeof(device));
 
     device.tunnel_writer = (BTap_write_handler)writer;
     device.tunnel_writer_ctx = ctx;

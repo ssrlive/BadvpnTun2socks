@@ -36,7 +36,6 @@
 #include "socksclient/BSocksClient.h"
 
 #include "generated/blog_channel_BSocksClient.h"
-//#include <Foundation/Foundation.h>
 #include <arpa/inet.h>
 
 #define STATE_CONNECTING 1
